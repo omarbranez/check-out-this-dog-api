@@ -5,7 +5,7 @@ class EncountersController < ApplicationController
   def index
     @encounters = Encounter.all
 
-    render json: @encounters
+    render json: EncounterSerializer.new(@encounters)
   end
 
   # GET /encounters/1
