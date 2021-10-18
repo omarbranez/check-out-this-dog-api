@@ -10,7 +10,7 @@ class EncountersController < ApplicationController
 
   # GET /encounters/1
   def show
-    render json: @encounter
+    render json: EncounterSerializer.new(@encounter)
   end
 
   # POST /encounters
