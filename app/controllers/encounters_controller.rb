@@ -5,23 +5,26 @@ class EncountersController < ApplicationController
   def index
     @encounters = Encounter.all
 
-    render json: EncounterSerializer.new(@encounters)
+    render json: @encounters
   end
 
   # GET /encounters/1
   def show
-    render json: EncounterSerializer.new(@encounter)
+    render json: @encounter
   end
 
   # POST /encounters
   def create
-    @encounter = Encounter.new(encounter_params)
-
-    if @encounter.save
-      render json: @encounter, status: :created, location: @encounter
-    else
-      render json: @encounter.errors, status: :unprocessable_entity
-    end
+    # binding.pry
+    @encounter = Encounter.create(encounter_params)
+    # @encounter = Encounter.new(encounter_params)
+    @encounters = Encounter.all
+    render json: @encounters
+    # if @encounter.save
+    #   render json: @encounter, status: :created, location: @encounter
+    #  else
+    #   render json: @encounter.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /encounters/1
@@ -46,6 +49,7 @@ class EncountersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def encounter_params
-      params.require(:encounter).permit(:user_id, :dog_id, :name, :color, :age, :gender, :features, :demeanor, :ping, :reactions)
+      # params.require(:encounter)#
+      params.permit(:user_id, :dog_id, :name, :color, :age, :gender, :features, :demeanor, :lat, :lng, :reactions, :photo)
     end
 end

@@ -11,7 +11,7 @@ class DogsController < ApplicationController
   # GET /dogs/1
   def show
     # render json: @dog
-    render json: DogSerializer.new(@dog)
+    render json: @dog
   end
 
   # POST /dogs
