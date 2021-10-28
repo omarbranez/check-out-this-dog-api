@@ -2,7 +2,7 @@ class EncounterSerializer < ActiveModel::Serializer
 include Rails.application.routes.url_helpers
   # include JSONAPI::Serializer
   # set_key_transform :camel_lower
-  attributes :id, :name, :color, :age, :features, :demeanor, :lat, :lng, :user_id, :dog_id, :photo
+  attributes :id, :username, :name, :color, :age, :features, :demeanor, :lat, :lng, :user_id, :dog_id, :photo
   
   def photo
     if object.photo.attached?
@@ -10,6 +10,9 @@ include Rails.application.routes.url_helpers
     end
   end
 
+  def username
+    object.user.username
+  end
   
   # attribute :photo do |encounter|
   #   encounter.photo_url
