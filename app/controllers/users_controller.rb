@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      token = encode_token(user.id)
+      token = encode_token(@user.id)
       # render json: @user, status: :created, location: @user
       render json: {user: @user, token: token}
     else

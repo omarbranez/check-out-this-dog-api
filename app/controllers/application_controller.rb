@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::API
+    # include ExceptionHandler
 
     def encode_token(id)
-        JWT.encode({user_id: id}, ENV["JWT_KEY"])
+        JWT.encode({user_id: id}, ENV["JWT_SECRET"])
     end
 
     def user_token
@@ -9,10 +10,11 @@ class ApplicationController < ActionController::API
     end
 
     def decode_token
-        JWT.decode(user_token, ENV["JWT_KEY"])
+        JWT.decode(user_token, ENV["JWT_SECRET"])
     end
 
-    def logged_in_user
+    def session_user
+        # binding.pry
         User.find_by_id(decode_token[0]["user_id"])
     end
 
