@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_190455) do
+ActiveRecord::Schema.define(version: 2021_11_02_003213) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_190455) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "lat"
     t.float "lng"
-    t.binary "photo"
+    t.boolean "show"
     t.index ["dog_id"], name: "index_encounters_on_dog_id"
     t.index ["user_id"], name: "index_encounters_on_user_id"
   end
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_190455) do
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
