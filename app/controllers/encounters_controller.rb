@@ -50,6 +50,6 @@ class EncountersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def encounter_params
       # params.require(:encounter)#
-      params.permit(:user_id, :dog_id, :name, :color, :age, :gender, :features, :demeanor, :lat, :lng, :reactions, :photo)
+      params.permit(:user_id, :dog_id, :name, :color, :age, :gender, :features, :demeanor, :lat, :lng, :reactions, :photo, :show)
     end
 end
