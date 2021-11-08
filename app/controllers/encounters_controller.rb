@@ -3,7 +3,7 @@ class EncountersController < ApplicationController
 
   # GET /encounters
   def index
-    @encounters = Encounter.all
+    @encounters = Encounter.all.order("created_at DESC")
 
     render json: @encounters
   end

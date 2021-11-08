@@ -24,6 +24,7 @@ include Rails.application.routes.url_helpers
 
   def created
     object.created_at.strftime("%m/%d/%Y, %l:%M:%S %p")
+    
   end
 
   def date_created
