@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if @user.save
       token = encode_token(@user.id)
       # render json: @user, status: :created, location: @user
-      render json: {user: @user, token: token}
+      render json: {user: UserSerializer.new(@user), token: token}
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -48,6 +48,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :password)
+      params.permit(:username, :password, :lat, :lng)
     end
 end
