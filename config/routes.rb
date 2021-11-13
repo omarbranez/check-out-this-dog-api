@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :reactions
-  resources :encounters
+  resources :reports
   resources :dogs
   resources :users
   post 'login', to: "sessions#login"

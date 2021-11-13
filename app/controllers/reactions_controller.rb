@@ -38,7 +38,7 @@ class ReactionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def reaction_params
       # params.require(:reaction)#
-      params.permit(:user_id, :encounter_id, :rating, :content)
+      params.permit(:user_id, :report_id, :rating, :content)
     end
     
 end

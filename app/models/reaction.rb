@@ -1,4 +1,4 @@
 class Reaction < ApplicationRecord
     belongs_to :user
-    belongs_to :encounter
+    belongs_to :report
 end
