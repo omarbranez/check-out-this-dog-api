@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_200333) do
+ActiveRecord::Schema.define(version: 2021_11_13_222854) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 2021_11_10_200333) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "report_id"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "dogs", force: :cascade do |t|
     t.string "breed"
     t.string "temperament"
@@ -58,7 +66,16 @@ ActiveRecord::Schema.define(version: 2021_11_10_200333) do
     t.integer "image"
   end
 
-  create_table "encounters", force: :cascade do |t|
+  create_table "reactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "report_id"
+    t.boolean "liked"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reports", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "dog_id", null: false
     t.string "name"
@@ -78,15 +95,6 @@ ActiveRecord::Schema.define(version: 2021_11_10_200333) do
     t.index ["user_id"], name: "index_encounters_on_user_id"
   end
 
-  create_table "reactions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "encounter_id"
-    t.integer "rating"
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
@@ -99,6 +107,6 @@ ActiveRecord::Schema.define(version: 2021_11_10_200333) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "encounters", "dogs"
-  add_foreign_key "encounters", "users"
+  add_foreign_key "reports", "dogs"
+  add_foreign_key "reports", "users"
 end

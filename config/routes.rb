@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :reports
   resources :dogs
   resources :users
+  resources :comments
   post 'login', to: "sessions#login"
   post 'autologin', to: "sessions#autologin"
 
