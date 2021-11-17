@@ -1,7 +1,7 @@
 class ReportSerializer < ActiveModel::Serializer
 include Rails.application.routes.url_helpers
-
-  attributes :id, :username, :breed, :name, :color, :age, :features, :demeanor, :lat, :lng, :user_id, :dog_id, :photo, :date_created, :time_created, :created, :updated_at, :show, :reactions, :comments
+  # has_many :reactions
+  attributes :id, :username, :breed, :name, :color, :age, :features, :demeanor, :lat, :lng, :user_id, :dog_id, :photo, :date_created, :time_created, :created, :updated_at, :show, :reactions, :comments, :liked
   
   def photo
     if object.photo.attached?
@@ -34,6 +34,12 @@ include Rails.application.routes.url_helpers
     object.created_at.strftime("%I:%M %p")
   end
 
+  def liked
+    # binding.pry
+
+    !!Reaction.find_by(user_id: @instance_options[:user].id, report_id: self.object.id)
+  end
+
   def reactions
       object.reactions.map do |reaction|
         {
@@ -41,7 +47,6 @@ include Rails.application.routes.url_helpers
           user_id: reaction.user_id,
           username: User.find(reaction.user_id).username,
           report_id: reaction.report_id,
-          liked: reaction.liked,
           created: reaction.created_at.strftime("%m/%d/%Y, %l:%M:%S %p")
         }
     end
@@ -54,6 +59,7 @@ include Rails.application.routes.url_helpers
           user_id: comment.user_id,
           username: User.find(comment.user_id).username,
           report_id: comment.report_id,
+          content: comment.content,
           created: comment.created_at.strftime("%m/%d/%Y, %l:%M:%S %p")
         }
       end

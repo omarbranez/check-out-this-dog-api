@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
             render json: {error: "Login Attempt Unsuccessful"}
         end
     end
-
+    
     def autologin
         if session_user
             render json: {user: UserSerializer.new(session_user)}

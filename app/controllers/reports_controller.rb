@@ -10,7 +10,9 @@ class ReportsController < ApplicationController
 
   # GET /Reports/1
   def show
-    render json: @report
+    # binding.pry
+    @logged_in_user = session_user
+    render json: @report, user: @logged_in_user
   end
 
   # POST /Reports

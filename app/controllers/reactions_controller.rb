@@ -1,19 +1,21 @@
 class ReactionsController < ApplicationController
     before_action :set_reaction, only: [:show, :update, :destroy]
     def index
-        @reaction = Reaction.all.order("created_at DESC")
+        @reactions = Reaction.all.order("created_at DESC")
     
         render json: @reactions
     end
 
     def show
-        render json: @reaction
+      # session_user
+      render json: @reaction
     end
 
     def create
-        # binding.pry
-        @reaction = Reaction.create(reaction_params)
-        @reactions = Reaction.all
+      # binding.pry
+      
+      @reaction = Reaction.first_or_create!(reaction_params)
+      @reactions = Reaction.where(report_id: reaction_params[:report_id])
         render json: @reactions
     end
 
@@ -38,7 +40,7 @@ class ReactionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def reaction_params
       # params.require(:reaction)#
-      params.permit(:user_id, :report_id, :liked)
+      params.permit(:user_id, :report_id)
     end
     
 end
