@@ -1,7 +1,7 @@
 class ReportSerializer < ActiveModel::Serializer
 include Rails.application.routes.url_helpers
   # has_many :reactions
-  attributes :id, :username, :breed, :name, :color, :age, :features, :demeanor, :lat, :lng, :user_id, :dog_id, :photo, :date_created, :time_created, :created, :updated_at, :show, :reactions, :comments, :liked
+  attributes :id, :username, :breed, :name, :color, :age, :features, :demeanor, :lat, :lng, :user_id, :dog_id, :photo, :date_created, :time_created, :created, :updated_at, :show, :reactions, :comments, :liked, :like_id, :commented, :comment_id
   
   def photo
     if object.photo.attached?
@@ -35,9 +35,19 @@ include Rails.application.routes.url_helpers
   end
 
   def liked
-    # binding.pry
-
     !!Reaction.find_by(user_id: @instance_options[:user].id, report_id: self.object.id)
+  end
+
+  def like_id
+    !!Reaction.find_by(user_id: @instance_options[:user].id, report_id: self.object.id) ? Reaction.find_by(user_id: @instance_options[:user].id, report_id: self.object.id).id : ""
+  end
+
+  def commented
+    !!Comment.find_by(user_id: @instance_options[:user].id, report_id: self.object.id)
+  end
+
+  def comment_id
+    !!Comment.find_by(user_id: @instance_options[:user].id, report_id: self.object.id) ? Comment.find_by(user_id: @instance_options[:user].id, report_id: self.object.id).id : ""
   end
 
   def reactions

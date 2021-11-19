@@ -14,9 +14,10 @@ class ReactionsController < ApplicationController
     def create
       # binding.pry
       
-      @reaction = Reaction.first_or_create!(reaction_params)
-      @reactions = Reaction.where(report_id: reaction_params[:report_id])
-        render json: @reactions
+      @reaction = Reaction.find_or_create_by!(reaction_params)
+      # @reactions = Reaction.where(report_id: reaction_params[:report_id])
+        # render json: @reactions
+      render json: @reaction
     end
 
     def update
