@@ -18,16 +18,9 @@ class ReportsController < ApplicationController
 
   # POST /Reports
   def create
-    # binding.pry
     @report = Report.create(report_params)
-    # @report = Report.new(Report_params)
     @reports = Report.all
     render json: @reports
-    # if @report.save
-    #   render json: @report, status: :created, location: @report
-    #  else
-    #   render json: @report.errors, status: :unprocessable_entity
-    # end
   end
 
   # PATCH/PUT /Reports/1

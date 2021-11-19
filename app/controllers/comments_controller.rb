@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
 
     def create
         # binding.pry
-        @comment = Comment.find_or_create_by!(reaction_params)
+        @comment = Comment.create(comment_params)
         # @comments = Comment.all
         # render json: @comments
         render json: @comment

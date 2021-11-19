@@ -63,7 +63,7 @@ include Rails.application.routes.url_helpers
   end
 
   def comments
-      object.comments.map do |comment|
+      object.comments.order("created_at DESC").map do |comment|
         {
           id: comment.id,
           user_id: comment.user_id,
