@@ -1,19 +1,16 @@
 class SessionsController < ApplicationController
 
-    def login
-        user = User.find_by(username: params[:username])
-        if user && user.authenticate(params[:password])
-            token = encode_token(user.id)
-            render json: {user: UserSerializer.new(user), token: token}
-        else
-            render json: {error: "Login Attempt Unsuccessful"}
-        end
+  def create
+    user = User.find_by_username(params[:username])
+    if user && user.authenticate(params[:password])
+      render_user_with_token(user)
+    else
+      render json: {errors: "Login Attempt Unsuccessful"}, status: :forbidden
     end
-    
-    def autologin
-        if session_user
-            render json: {user: UserSerializer.new(session_user)}
-        end
-    end
+  end
+
+  def autologin
+    render_user_with_token(logged_in_user)
+  end
 
 end

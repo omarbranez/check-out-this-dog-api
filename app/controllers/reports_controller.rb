@@ -3,7 +3,7 @@ class ReportsController < ApplicationController
 
   # GET /Reports
   def index
-    @logged_in_user = session_user
+    @logged_in_user = logged_in_user
     @reports = Report.all.order("created_at DESC")
 
     render json: @reports, user: @logged_in_user
@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
   # GET /Reports/1
   def show
     # binding.pry
-    @logged_in_user = session_user
+    @logged_in_user = logged_in_user
     render json: @report, user: @logged_in_user
   end
 
