@@ -11,10 +11,7 @@ class CommentsController < ApplicationController
     end
 
     def create
-        # binding.pry
         @comment = Comment.create(comment_params)
-        # @comments = Comment.all
-        # render json: @comments
         render json: @comment
     end
 
@@ -38,7 +35,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      # params.require(:comment)#
       params.permit(:user_id, :report_id, :content)
     end
     

@@ -54,25 +54,25 @@
 #     :lat => 40.8052184,
 #     :lng => -74.0137679
 # )
-Encounter.create(
-    :name => "Lexi",
-    :user_id => 2,
-    :dog_id => 472,
-    :gender => "Female",
-    :color => "Chocolate",
-    :age => "2",
-    :features => "useless. is velcro",
-    :demeanor => "thinks its a great dane",
-    :lat => 40.756260,
-    :lng => -73.893730
+# Encounter.create(
+#     :name => "Lexi",
+#     :user_id => 2,
+#     :dog_id => 472,
+#     :gender => "Female",
+#     :color => "Chocolate",
+#     :age => "2",
+#     :features => "useless. is velcro",
+#     :demeanor => "thinks its a great dane",
+#     :lat => 40.756260,
+#     :lng => -73.893730
 
-)
-def seed_image(file_name)
-    # binding.pry
-    File.open(File.join(Rails.root, "/app/assets/#{file_name}.jpg"))
-end
-# phase-5/check-out-this-dog-api/app/assets/IMG_8651.jpg
-# Encounter.find(1).attributes[:photo] = seed_image("IMG_8651")
-# Encounter.find(1).photo.attach(io: File.open('app/assets/IMG_8651.jpg'), filename: 'pancake.jpg', content_type: 'image/jpg')
-# Encounter.find(2).photo.attach(io: File.open('app/assets/IMG_8652.jpg'), filename: 'potato.jpg', content_type: 'image/jpg')
-Encounter.find(3).photo.attach(io: File.open('app/assets/IMG_0464.jpg'), filename: 'lexi.jpg', content_type: 'image/jpg')
+# )
+# def seed_image(file_name)
+#     # binding.pry
+#     File.open(File.join(Rails.root, "/app/assets/#{file_name}.jpg"))
+# end
+# # phase-5/check-out-this-dog-api/app/assets/IMG_8651.jpg
+# # Encounter.find(1).attributes[:photo] = seed_image("IMG_8651")
+# # Encounter.find(1).photo.attach(io: File.open('app/assets/IMG_8651.jpg'), filename: 'pancake.jpg', content_type: 'image/jpg')
+# # Encounter.find(2).photo.attach(io: File.open('app/assets/IMG_8652.jpg'), filename: 'potato.jpg', content_type: 'image/jpg')
+# Encounter.find(3).photo.attach(io: File.open('app/assets/IMG_0464.jpg'), filename: 'lexi.jpg', content_type: 'image/jpg')

@@ -18,9 +18,10 @@ class ReportsController < ApplicationController
 
   # POST /Reports
   def create
+    @logged_in_user = logged_in_user
     @report = Report.create(report_params)
     @reports = Report.all
-    render json: @reports
+    render json: @reports, user: @logged_in_user
   end
 
   # PATCH/PUT /Reports/1
@@ -44,7 +45,7 @@ class ReportsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def Report_params
+    def report_params
       # params.require(:Report)#
       params.permit(:user_id, :dog_id, :name, :color, :age, :gender, :features, :demeanor, :lat, :lng, :reactions, :photo, :show)
     end

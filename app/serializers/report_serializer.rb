@@ -17,13 +17,8 @@ include Rails.application.routes.url_helpers
     Dog.find(object.dog_id).breed
   end
 
-  # def created
-  #   object.created_at.strftime("%I:%M %p, %B %d, %Y")
-  # end
-
   def created
     object.created_at.strftime("%m/%d/%Y, %l:%M:%S %p")
-    
   end
 
   def date_created
@@ -35,7 +30,8 @@ include Rails.application.routes.url_helpers
   end
 
   def liked
-    !!Reaction.find_by(user_id: @instance_options[:user].id, report_id: self.object.id)
+    # binding.pry
+    Reaction.where(user_id: @instance_options[:user].id, report_id: self.object.id).exists?
   end
 
   def like_id
@@ -43,7 +39,7 @@ include Rails.application.routes.url_helpers
   end
 
   def commented
-    !!Comment.find_by(user_id: @instance_options[:user].id, report_id: self.object.id)
+    Comment.where(user_id: @instance_options[:user].id, report_id: self.object.id).exists?
   end
 
   def comment_id

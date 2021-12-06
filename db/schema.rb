@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2021_11_13_222854) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_11_13_222854) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -60,24 +63,11 @@ ActiveRecord::Schema.define(version: 2021_11_13_222854) do
     t.string "height"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "breed_group"
-    t.string "bred_for"
-    t.integer "description"
-    t.integer "image"
   end
 
-  create_table "reactions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "report_id"
-    t.boolean "liked"
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "dog_id", null: false
+  create_table "encounters", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "dog_id", null: false
     t.string "name"
     t.string "color"
     t.integer "age"
@@ -88,11 +78,20 @@ ActiveRecord::Schema.define(version: 2021_11_13_222854) do
     t.integer "reactions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "lat"
-    t.float "lng"
+    t.string "lat"
+    t.string "lng"
     t.boolean "show"
     t.index ["dog_id"], name: "index_encounters_on_dog_id"
     t.index ["user_id"], name: "index_encounters_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "encounter_id"
+    t.integer "rating"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -100,13 +99,12 @@ ActiveRecord::Schema.define(version: 2021_11_13_222854) do
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
     t.float "lat"
     t.float "lng"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "reports", "dogs"
-  add_foreign_key "reports", "users"
+  add_foreign_key "encounters", "dogs"
+  add_foreign_key "encounters", "users"
 end
